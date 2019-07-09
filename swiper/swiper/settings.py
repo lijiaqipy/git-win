@@ -89,6 +89,14 @@ CACHES = {
     }
 }
 
+
+REDIS = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 2
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
