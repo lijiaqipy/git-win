@@ -74,6 +74,21 @@ DATABASES = {
     }
 }
 
+# 缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # "PASSWORD": "mysecret",
+            "PICKLE_VERSION": -1,
+            "SOCKET_CONNECT_TIMEOUT": 5,  # 连接超时时间
+            "SOCKET_TIMEOUT": 5,  # 获取数据超时时间
+        }
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -112,8 +127,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
 # 日志配置
 LOGGING_DIR = os.path.join(BASE_DIR, 'logs')
 
@@ -131,7 +144,7 @@ LOGGING = {
         },
         'verbose': {
             'format': ('%(asctime)s %(levelname)s [%(process)d-%(threadName)s] '
-                    '%(module)s.%(funcName)s line %(lineno)d: %(message)s'),
+                       '%(module)s.%(funcName)s line %(lineno)d: %(message)s'),
             'datefmt': '%Y-%m-%d %H:%M:%S',
         }
     },
@@ -144,15 +157,15 @@ LOGGING = {
         'info': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': f'{BASE_DIR}/logs/info.log',  # 日志保存路径
-            'when': 'D',        # 每天切割日志
+            'when': 'D',  # 每天切割日志
             'backupCount': 30,  # 日志保留 30 天
             'formatter': 'simple',
-            'level': 'INFO',
+            'level': 'DEBUG',
         },
         'error': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': f'{BASE_DIR}/logs/error.log',  # 日志保存路径
-            'when': 'W0',      # 每周一切割日志
+            'when': 'W0',  # 每周一切割日志
             'backupCount': 4,  # 日志保留 4 周
             'formatter': 'verbose',
             'level': 'WARNING',
@@ -166,7 +179,7 @@ LOGGING = {
         'inf': {
             'handlers': ['info'],
             'propagate': True,
-            'level': 'INFO',
+            'level': 'DEBUG' if DEBUG else 'INFO',
         },
         'err': {
             'handlers': ['error'],

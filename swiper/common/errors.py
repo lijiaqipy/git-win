@@ -21,12 +21,6 @@ class LogicException(Exception):
     def __init__(self, code):
         self.code = code
 
-    # def __str__(self):
-    #     return '{module_name}.{class_name}: {code}'.format(
-    #                     module_name=self.__module__,
-    #                     class_name=self.__name__,
-    #                     code=self.code)
-
 
 class LogicError(Exception):
     code = None

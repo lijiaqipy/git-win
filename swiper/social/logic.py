@@ -53,8 +53,9 @@ def like_someone(uid, sid):
         # Friend.make_friends(uid, sid)
         # TODO: 向 sid 用户发送推送通知
         Friend.objects.make_friends(uid, sid)
+        return True
 
-    return ret
+    return False
 
 
 def superlike_someone(uid, sid):
@@ -74,8 +75,9 @@ def superlike_someone(uid, sid):
     # 如果被滑动人喜欢过我，则建立好友关系
     if ret and Swiped.is_liked(sid, uid):
         Friend.make_friends(uid, sid)
+        return True
 
-    return ret
+    return False
 
 
 def rewind(user):

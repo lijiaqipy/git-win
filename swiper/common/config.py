@@ -4,6 +4,9 @@
 # 缓存 key prefix
 VERIFY_CODE_CACHE_PREFIX = 'verfiy_code:%s'
 REWIND_CACHE_PREFIX = 'rewind:%s'
+PROFILE_DATA_CACHE_PREFIX = 'profile_data:%s'
+MODEL_CACHE_PREFIX = 'model:%s:%s'
+
 
 # 社交模块配置
 REWIND_TIMES = 3
